@@ -49,7 +49,7 @@ public class HibernateValidatorConfiguration {
         return Validation
                 .byProvider(HibernateValidator.class)
                 .configure()
-                //自定义message名称，否则只会读取默认配置下的ValidationMessage这个文件
+                //自定义message名称，否则只会读取默认配置下的ValidationMessage这个文件                .messageInterpolator(new ResourceBundleMessageInterpolator( new AggregateResourceBundleLocator(Arrays.asList("MyMessages1","MyMessages2","MyMessages3"))))
                 .messageInterpolator(new ResourceBundleMessageInterpolator(new PlatformResourceBundleLocator("myValidationMessages" )))
                 //快速返回模式，有一个验证失败立即返回错误信息
                 .failFast(true)
