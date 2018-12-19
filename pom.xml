@@ -25,6 +25,7 @@
         <!--AOP类库依赖-->
         <aspectj.version>1.7.0</aspectj.version>
         <lombok.version>1.12.2</lombok.version>
+        <time-duration-validator-example.version>1.0-SNAPSHOT</time-duration-validator-example.version>
     </properties>
 
     <dependencies>
@@ -75,6 +76,17 @@
             <artifactId>lombok</artifactId>
             <version>${lombok.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.zcy</groupId>
+            <artifactId>myvalidator</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.acme</groupId>
+            <artifactId>time-duration-validator-core</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
     </dependencies>
 
     <build>

@@ -4,6 +4,7 @@ import com.example.demo.dto.User;
 import com.example.demo.services.api.RequireWriteService;
 import com.example.demo.util.ValidationUtil;
 import com.example.demo.validator.aop.Inspect;
+import com.example.demo.validator.groups.ValidGroups;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
@@ -46,7 +47,7 @@ public class RequireWriteServiceImpl implements RequireWriteService {
      */
 
     @Override
-    public void deleteRequire(@Valid User user){
+    public void deleteRequire( User user){
 
         System.out.println("method_deleteRequire");
     }
@@ -57,7 +58,7 @@ public class RequireWriteServiceImpl implements RequireWriteService {
      * @return
      */
     @Override
-    public void submitRequire( User user){
-
+    public void submitRequire(@Validated({ValidGroups.First.class}) User user){
+        System.out.println("nvjfnj");
     }
 }

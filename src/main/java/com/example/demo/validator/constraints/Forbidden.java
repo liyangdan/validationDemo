@@ -17,7 +17,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Target({ FIELD, METHOD, PARAMETER, ANNOTATION_TYPE })
 @Retention(RUNTIME)
 //指定验证器
-@Constraint(validatedBy = ForbiddenValidator.class)
+@Constraint(validatedBy = {ForbiddenValidator.class})
 @Documented
 public @interface Forbidden {
 

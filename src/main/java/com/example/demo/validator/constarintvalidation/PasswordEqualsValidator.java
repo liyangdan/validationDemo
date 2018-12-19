@@ -34,10 +34,10 @@ public class PasswordEqualsValidator implements ConstraintValidator<PasswordEqua
 
 
 
-// disable default violation rule
+    // disable default violation rule
         context.disableDefaultConstraintViolation();
 
-// assign error on password Confirm field
+    // assign error on password Confirm field
 
         context.buildConstraintViolationWithTemplate(messageTemplate).addPropertyNode("passwordConfirm")
                 .addConstraintViolation();

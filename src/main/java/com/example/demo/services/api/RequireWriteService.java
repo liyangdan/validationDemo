@@ -39,5 +39,5 @@ public interface RequireWriteService {
      * @param user
      * @return
      */
-    void submitRequire( User user);
+    void submitRequire(@Valid User user);
 }

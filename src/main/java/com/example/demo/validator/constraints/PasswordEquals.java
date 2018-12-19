@@ -24,7 +24,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Documented
 public @interface PasswordEquals {
 
-    String message() default "Password is not the same";
+    String message() default "{password.is.not.equal}";
     Class <?>[] groups() default {};
     Class <? extends Payload>[] payload() default {};
 }

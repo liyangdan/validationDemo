@@ -1,6 +1,7 @@
 package com.example.demo.validator.aop;
 
 import com.example.demo.exception.ServiceResponseException;
+import com.example.demo.validator.constraints.ZcyValidated;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -13,6 +14,7 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
+import java.util.Iterator;
 import java.util.Set;
 
 /**
@@ -130,8 +132,8 @@ public class ValidatorAspect {
 
         for (int i = 0; i < args.length; i++) {
             for (Annotation annotation : argAnnotations[i]) {
-                if (Validated.class.isInstance(annotation)) {
-                    Validated validated = (Validated) annotation;
+                if (ZcyValidated.class.isInstance(annotation)) {
+                    ZcyValidated validated = (ZcyValidated) annotation;
                     Class<?>[] groups = validated.value();
                     this.validAndReturnFirstErrorTips(pjp, args[i], groups);
                 }
@@ -155,15 +157,20 @@ public class ValidatorAspect {
      */
     private <T> void validAndReturnFirstErrorTips(ProceedingJoinPoint pjp, T t, Class<?>... groups) {
         Set<ConstraintViolation<T>> validate = validator.validate(t, groups);
+
         if (validate.size() > 0) {
-            ConstraintViolation<T> next = validate.iterator().next();
-            //你就可以通过调用ConstraintViolation.getConstraintDescriptor().getPayload()来得到之前指定到错误级别了,
-            // 并且可以根据这个信息来决定接下来到行为.
-            //next.getConstraintDescriptor().getPayload();
-            log.error("业务出错的方法定义:{}, 对象: {}, 字段: {}, 入参：{}",pjp.toLongString(),
-                    next.getRootBeanClass().getName(), next.getPropertyPath(), next.getLeafBean());
-            //throw new ServiceResponseException(next.getMessage());
-            throw new ServiceResponseException("service层参数异常");
+            Iterator<ConstraintViolation<T>> iterator = validate.iterator();
+            while(iterator.hasNext()) {
+                ConstraintViolation<T> next = iterator.next();
+                //你就可以通过调用ConstraintViolation.getConstraintDescriptor().getPayload()来得到之前指定到错误级别了,
+                // 并且可以根据这个信息来决定接下来到行为.
+                //next.getConstraintDescriptor().getPayload();
+                System.out.println(next.getMessage() + "--" + next.getMessageTemplate());
+                log.error("业务出错的方法定义:{}, 对象: {}, 字段: {}, 入参：{}", pjp.toLongString(),
+                        next.getRootBeanClass().getName(), next.getPropertyPath(), next.getLeafBean());
+                //throw new ServiceResponseException(next.getMessage());
+                //throw new ServiceResponseException("service层参数异常");
+            }
         }
     }
 
