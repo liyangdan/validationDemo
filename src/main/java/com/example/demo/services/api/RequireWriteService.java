@@ -6,6 +6,7 @@ package com.example.demo.services.api;
  */
 
 import com.example.demo.dto.User;
+import com.example.demo.validator.constraints.CrossParameter;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 
@@ -40,4 +41,7 @@ public interface RequireWriteService {
      * @return
      */
     void submitRequire(@Valid User user);
+
+    @CrossParameter
+     void changePassword(String oldPassWord, String newPassWord);
 }

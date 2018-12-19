@@ -1,37 +1,24 @@
 package com.example.demo.controller;
 
-import com.example.demo.damain.Happiness;
 import com.example.demo.dto.*;
 
-import com.example.demo.services.HappinessService;
 import com.example.demo.services.api.RequireWriteService;
 import com.example.demo.util.ValidList;
 import com.example.demo.validator.aop.Inspect;
 
 import com.example.demo.validator.constraints.ZcyValidated;
-import com.example.demo.validator.groups.ValidGroups;
-import com.zcy.validator.constraints.IsMobile;
 import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
-import org.springframework.context.annotation.Bean;
 import org.springframework.http.MediaType;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.validation.beanvalidation.MethodValidationPostProcessor;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import javax.validation.Valid;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.groups.Default;
 import java.util.List;
-import java.util.Locale;
 
 
 /**
@@ -106,6 +93,7 @@ public class TestController {
         System.out.println("kkk");
     }
 
+
     /**
      * 校验对象存在继承,这样在对类 Dog 的实例进行验证的时候，如果使用默认的组别（Default.class），
      * 则 name，ownername 和 type 都将进行验证；
@@ -149,5 +137,20 @@ public class TestController {
        //requireWriteService.deleteRequire(user);
         requireWriteService.submitRequire(user);
         return null;
+    }
+
+    /**
+     * 跨参数校验
+     *
+     * @param oldPassWord
+     * @param newPassWord
+     * @return
+     */
+    @RequestMapping("/test5")
+    public void  changePassword(
+            @RequestParam("oldPassWord") String oldPassWord,
+            @RequestParam("newPassWord") String newPassWord) {
+        requireWriteService.changePassword(oldPassWord, newPassWord);
+        System.out.println("test5 success");
     }
 }

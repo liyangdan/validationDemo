@@ -12,6 +12,7 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.validation.groups.ConvertGroup;
 import javax.validation.groups.Default;
 
 /**
@@ -24,6 +25,7 @@ public class User {
 //    @Size(min = 2, max = 10,message = "{name.size}")
 ////    @Length(max = 3,message = "{name.length}")
     @NotNull(groups = ValidGroups.First.class)
+        @Forbidden(keyWord = {"main","admin"})
     String name;
 
     @Max(value = 150, message = "{age.no.more.than}")

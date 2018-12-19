@@ -4,6 +4,7 @@ import com.example.demo.dto.User;
 import com.example.demo.services.api.RequireWriteService;
 import com.example.demo.util.ValidationUtil;
 import com.example.demo.validator.aop.Inspect;
+import com.example.demo.validator.constraints.CrossParameter;
 import com.example.demo.validator.groups.ValidGroups;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -59,6 +60,12 @@ public class RequireWriteServiceImpl implements RequireWriteService {
      */
     @Override
     public void submitRequire(@Validated({ValidGroups.First.class}) User user){
-        System.out.println("nvjfnj");
+        System.out.println("submitRequire");
+    }
+
+    @CrossParameter
+    @Override
+    public void changePassword(String oldPassWord, String newPassWord){
+        System.out.println("changePassword is successed");
     }
 }

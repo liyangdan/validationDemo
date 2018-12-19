@@ -14,7 +14,7 @@ import javax.validation.constraints.NotEmpty;
  * @date 2018/12/15 3:10 PM
  */
 @Data
-@PasswordEquals//校验对象
+@PasswordEquals//校验对象 类级别校验
 public class RegisterForm {
 
     @NotEmpty

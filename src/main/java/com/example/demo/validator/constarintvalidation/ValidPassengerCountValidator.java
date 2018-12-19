@@ -12,8 +12,7 @@ import java.util.ArrayList;
  * @date 2018/12/9 8:57 PM
  */
 
-public class ValidPassengerCountValidator
-        implements ConstraintValidator<ValidPassengerCount, Car> {
+public class ValidPassengerCountValidator implements ConstraintValidator<ValidPassengerCount, Car> {
 
     @Override
     public void initialize(ValidPassengerCount constraintAnnotation) {

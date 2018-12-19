@@ -21,6 +21,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Documented
 public @interface Forbidden {
 
+    String[] keyWord() default {};
     //默认错误消息
     String message() default "{forbidden.word}";
 

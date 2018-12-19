@@ -15,6 +15,8 @@ import static java.lang.annotation.ElementType.TYPE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
+ * 类级别约束
+ *
  * @author liyangdan
  * @date 2018/12/15 3:06 PM
  */
@@ -24,7 +26,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Documented
 public @interface PasswordEquals {
 
-    String message() default "{password.is.not.equal}";
+    String message() default "{password.confirmation.error}";
     Class <?>[] groups() default {};
     Class <? extends Payload>[] payload() default {};
 }
