@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 
+import javax.validation.ConstraintTarget;
 import javax.validation.Valid;
 
 
@@ -63,9 +64,16 @@ public class RequireWriteServiceImpl implements RequireWriteService {
         System.out.println("submitRequire");
     }
 
-    @CrossParameter
+    /**
+     * 跨参数验证
+     *
+     * @param oldPassWord
+     * @param newPassWord
+     */
     @Override
-    public void changePassword(String oldPassWord, String newPassWord){
+   // @CrossParameter(validationAppliesTo = ConstraintTarget.PARAMETERS)
+    public String changePassword(String oldPassWord, String newPassWord){
         System.out.println("changePassword is successed");
+        return "123";
     }
 }

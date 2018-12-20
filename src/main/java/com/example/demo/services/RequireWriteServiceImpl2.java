@@ -53,7 +53,7 @@ public class RequireWriteServiceImpl2 implements RequireWriteService {
     }
 
     @Override
-    public void changePassword(String oldPassWord, String newPassWord){
-
+    public String changePassword(String oldPassWord, String newPassWord){
+        return "123";
     }
 }

@@ -12,7 +12,10 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
+import java.awt.event.ItemEvent;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author liyangdan
@@ -30,12 +33,14 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(ConstraintViolationException.class)
     public void handleValidationException(ConstraintViolationException e){
-        for(ConstraintViolation<?> s:e.getConstraintViolations()){
-           // return s.getInvalidValue()+": "+s.getMessage();
-            String message = ((ConstraintViolationException) e).getConstraintViolations().iterator().next().getMessage();
+        Iterator<ConstraintViolation<?>> iterator = e.getConstraintViolations().iterator();
+        while(iterator.hasNext()){
+            ConstraintViolation<?> next = iterator.next();
+            String message = next.getMessage();
 
-            System.out.println(message);
+            System.out.println("切面拦截:"+message);
         }
+
         //return "请求参数不合法";
     }
 
@@ -52,11 +57,11 @@ public class GlobalExceptionHandler {
         //如果是业务逻辑异常，返回具体的错误码与提示信息
         if (e instanceof ServiceResponseException) {
             ServiceResponseException logicException = (ServiceResponseException) e;
-
+            System.out.println("切面拦截"+logicException);
             //Validator验证框架抛出的业务逻辑异常
         } else if (e instanceof ConstraintViolationException) {
             String message = ((ConstraintViolationException) e).getConstraintViolations().iterator().next().getMessage();
-
+            System.out.println("切面拦截"+message);
         } else {
             //对系统级异常进行日志记录
             log.error("系统异常:" + e.getMessage(), e);

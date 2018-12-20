@@ -10,6 +10,7 @@ import com.example.demo.validator.constraints.CrossParameter;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 
+import javax.validation.ConstraintTarget;
 import javax.validation.Valid;
 
 public interface RequireWriteService {
@@ -42,6 +43,6 @@ public interface RequireWriteService {
      */
     void submitRequire(@Valid User user);
 
-    @CrossParameter
-     void changePassword(String oldPassWord, String newPassWord);
+    @CrossParameter(validationAppliesTo = ConstraintTarget.PARAMETERS)
+    String changePassword(String oldPassWord, String newPassWord);
 }

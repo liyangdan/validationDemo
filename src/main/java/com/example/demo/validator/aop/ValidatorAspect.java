@@ -158,7 +158,7 @@ public class ValidatorAspect {
     private <T> void validAndReturnFirstErrorTips(ProceedingJoinPoint pjp, T t, Class<?>... groups) {
         Set<ConstraintViolation<T>> validate = validator.validate(t, groups);
 
-        if (validate.size() > 0) {
+        //if (validate.size() > 0) {
             Iterator<ConstraintViolation<T>> iterator = validate.iterator();
             while(iterator.hasNext()) {
                 ConstraintViolation<T> next = iterator.next();
@@ -171,7 +171,7 @@ public class ValidatorAspect {
                 //throw new ServiceResponseException(next.getMessage());
                 //throw new ServiceResponseException("service层参数异常");
             }
-        }
+       // }
     }
 
 
