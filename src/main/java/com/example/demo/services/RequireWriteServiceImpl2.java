@@ -1,19 +1,27 @@
 package com.example.demo.services;
 
+
+import com.example.demo.dtotest.Car;
 import com.example.demo.dto.User;
 import com.example.demo.services.api.RequireWriteService;
 import com.example.demo.util.ValidationUtil;
-import com.example.demo.validator.aop.Inspect;
-import com.example.demo.validator.constraints.CrossParameter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
+
+import javax.validation.Valid;
+import javax.validation.Validator;
 
 /**
  * @author liyangdan
  * @date 2018/12/16 3:55 PM
  */
+@Validated
 @Service
 public class RequireWriteServiceImpl2 implements RequireWriteService {
+
+    @Autowired
+    private Validator validator;
 
     @Override
     public void createRequire(User user) {
@@ -44,11 +52,14 @@ public class RequireWriteServiceImpl2 implements RequireWriteService {
 
     /**
      * 提交需求单
-     * @param user
+     * @param car
      * @return
      */
     @Override
-    public void submitRequire( User user){
+    public void submitRequire( @Valid Car car){
+
+        System.out.println("test5 success");
+
 
     }
 

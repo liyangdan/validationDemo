@@ -1,18 +1,16 @@
 package com.example.demo.services;
 
+import com.example.demo.dtotest.Car;
 import com.example.demo.dto.User;
 import com.example.demo.services.api.RequireWriteService;
 import com.example.demo.util.ValidationUtil;
 import com.example.demo.validator.aop.Inspect;
-import com.example.demo.validator.constraints.CrossParameter;
 import com.example.demo.validator.groups.ValidGroups;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.zcy.validator.constraints.IsMobile;
 import org.springframework.stereotype.Service;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 
-import javax.validation.ConstraintTarget;
-import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
 
 /**
@@ -60,7 +58,7 @@ public class RequireWriteServiceImpl implements RequireWriteService {
      * @return
      */
     @Override
-    public void submitRequire(@Validated({ValidGroups.First.class}) User user){
+    public void submitRequire(@Validated({ValidGroups.First.class}) Car user){
         System.out.println("submitRequire");
     }
 

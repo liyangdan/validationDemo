@@ -1,7 +1,10 @@
 package com.example.demo.controller;
 
+import com.example.demo.dtotest.Driver;
 import com.example.demo.dto.*;
 
+import com.example.demo.services.RequireWriteServiceImpl;
+import com.example.demo.services.ValidateParamService;
 import com.example.demo.services.api.RequireWriteService;
 import com.example.demo.util.ValidList;
 import com.example.demo.validator.aop.Inspect;
@@ -18,6 +21,9 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 import java.util.List;
 
 
@@ -40,6 +46,9 @@ public class TestController {
     @Autowired
     @Qualifier("requireWriteServiceImpl2")
     private RequireWriteService requireWriteService2;
+
+    @Autowired
+    Validator validator;
 
 
 
@@ -135,7 +144,7 @@ public class TestController {
         user.setName("1999999999");
       //  requireWriteService2.deleteRequire(new User();
        //requireWriteService.deleteRequire(user);
-        requireWriteService.submitRequire(user);
+        //requireWriteService.submitRequire(user);
         return null;
     }
 
@@ -147,10 +156,35 @@ public class TestController {
      * @return
      */
     @RequestMapping("/test5")
-    public void  changePassword(
+    public void changePassword(
             @RequestParam("oldPassWord") String oldPassWord,
             @RequestParam("newPassWord") String newPassWord) {
         requireWriteService.changePassword(oldPassWord, newPassWord);
         System.out.println("test5 success");
     }
+
+    /**
+     * 测试@ConvertGroup
+     *
+     */
+    @RequestMapping("/test6")
+    public void test6() {
+        ValidateParamService validateParamService = new ValidateParamService("99");
+        System.out.println(validateParamService);
+//        com.example.demo.dtotest.Car car = new com.example.demo.dtotest.Car( "VW", "USD-123", 4 );
+//        car.setPassedVehicleInspection( true );
+//        requireWriteService2.submitRequire(car);
+//
+//        Driver john = new Driver( "John Doe" );
+//        john.setAge( 18 );
+//        car.setDriver( john );
+//        requireWriteService2.submitRequire(car);
+
+
+//        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+//        executableValidator = factory.getValidator().forExecutables();
+
+    }
+
+
 }

@@ -1,6 +1,7 @@
 package com.example.demo.validator.aop;
 
 import com.example.demo.exception.ServiceResponseException;
+import com.example.demo.services.ValidateParamService;
 import com.example.demo.validator.constraints.ZcyValidated;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -11,8 +12,12 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.annotation.Validated;
 import org.aspectj.lang.reflect.MethodSignature;
 import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
 import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
+import javax.validation.executable.ExecutableValidator;
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.util.Iterator;
 import java.util.Set;
@@ -175,7 +180,24 @@ public class ValidatorAspect {
     }
 
 
-
+    /**
+     * 构造函数入参校验
+     *
+     */
+    public  static void testValidateConstructor(ProceedingJoinPoint pj)throws NoSuchMethodException{
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        //1.获取校验器
+        Validator validator = factory.getValidator();
+        //2.获取校验方法参数的校验器
+        ExecutableValidator executableValidator = validator.forExecutables();
+        //3.获取构造函数
+        Constructor<ValidateParamService> constructor = ValidateParamService.class.getConstructor(String.class);
+        Object[] constructorsParams = new Object[]{null};
+        Set<ConstraintViolation<ValidateParamService>>  constraintViolationSet = executableValidator.validateConstructorParameters(constructor,constructorsParams);
+        for(ConstraintViolation item : constraintViolationSet){
+            log.info(item.getMessage());
+        }
+    }
 
 }
 

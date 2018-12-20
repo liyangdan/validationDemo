@@ -37,6 +37,7 @@ public class HibernateValidatorConfiguration {
      */
     @Bean
     public MethodValidationPostProcessor methodValidationPostProcessor() {
+       // return new MethodValidationPostProcessor();
         MethodValidationPostProcessor processor = new MethodValidationPostProcessor();
         // 默认是普通模式，会返回所有的验证不通过信息集合
         // 这里设置validator模式为快速失败返回

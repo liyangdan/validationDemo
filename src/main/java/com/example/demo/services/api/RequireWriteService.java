@@ -5,10 +5,9 @@ package com.example.demo.services.api;
  * @date 2018/12/15 1:46 PM
  */
 
+import com.example.demo.dtotest.Car;
 import com.example.demo.dto.User;
 import com.example.demo.validator.constraints.CrossParameter;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 
 import javax.validation.ConstraintTarget;
 import javax.validation.Valid;
@@ -41,8 +40,15 @@ public interface RequireWriteService {
      * @param user
      * @return
      */
-    void submitRequire(@Valid User user);
+    void submitRequire(@Valid Car user);
 
+    /**
+     * 跨参数校验
+     *
+     * @param oldPassWord 旧密码
+     * @param newPassWord 新密码
+     * @return
+     */
     @CrossParameter(validationAppliesTo = ConstraintTarget.PARAMETERS)
     String changePassword(String oldPassWord, String newPassWord);
 }
