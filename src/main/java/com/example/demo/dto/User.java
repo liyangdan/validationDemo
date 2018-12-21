@@ -8,10 +8,7 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.validation.GroupSequence;
 import javax.validation.Valid;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import javax.validation.groups.ConvertGroup;
 import javax.validation.groups.Default;
 
@@ -25,7 +22,7 @@ public class User {
 //    @Size(min = 2, max = 10,message = "{name.size}")
 ////    @Length(max = 3,message = "{name.length}")
     @NotNull(groups = ValidGroups.First.class)
-        @Forbidden(keyWord = {"main","admin"})
+        @Forbidden(fieldName = "姓名",keyWord = {"main","admin"})
     String name;
 
     @Max(value = 150, message = "{age.no.more.than}")
@@ -33,6 +30,12 @@ public class User {
 
     @IsMobile(groups = ValidGroups.Second.class)
     String phoneNumber;
+
+
+//    @Pattern.List({@Pattern(regexp = RegexConstant.NOT_CONTAIN_SPECIAL_SYMBOLS, message = "{context.special.symbols}"),
+//            @Pattern(regexp = RegexConstant.NON_PURE_NUMBER_PATTERN, message = "{inquiry.item.unit}")})
+    @Forbidden(fieldName = "个人信息" , keyWord = {"zcy"})
+    String information;
 
 
 }

@@ -20,8 +20,12 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Constraint(validatedBy = {ForbiddenValidator.class})
 @Documented
 public @interface Forbidden {
-
+    //敏感词
     String[] keyWord() default {};
+
+    //当前校验字段
+    String fieldName() default "";
+
     //默认错误消息
     String message() default "{forbidden.word}";
 

@@ -16,11 +16,13 @@ import org.hibernate.validator.constraintvalidation.HibernateConstraintValidator
 public class ForbiddenValidator implements ConstraintValidator<Forbidden, String> {
 
     private String[] forbiddenWords = null;
+    private String fieldName="";
 
     @Override
     public void initialize(Forbidden constraintAnnotation) {
         //初始化，得到注解数据
         forbiddenWords = constraintAnnotation.keyWord();
+        fieldName = constraintAnnotation.fieldName();
 
     }
 
@@ -43,6 +45,7 @@ public class ForbiddenValidator implements ConstraintValidator<Forbidden, String
 
                 //方法二：注入消息参数, 这个在消息取值时用{}
                 hibernateContext.addMessageParameter( "word", word );
+                hibernateContext.addMessageParameter("fieldName", fieldName);
                 //验证失败
                 return false;
             }

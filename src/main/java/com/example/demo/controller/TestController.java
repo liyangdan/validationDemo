@@ -10,6 +10,7 @@ import com.example.demo.util.ValidList;
 import com.example.demo.validator.aop.Inspect;
 
 import com.example.demo.validator.constraints.ZcyValidated;
+import com.example.demo.validator.groups.ValidGroups;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -81,6 +82,12 @@ public class TestController {
         System.out.println("kkk");
     }
 
+    /**
+     * 敏感词校验
+     *
+     * @param user
+     * @param bindingResult
+     */
     @RequestMapping(value = "/insert2", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public void testInsert2(@RequestBody(required = false)  @Validated ValidList<User> user, BindingResult bindingResult) {
         if (bindingResult.getErrorCount() > 0) {
@@ -95,7 +102,11 @@ public class TestController {
     }
 
 
-
+    /**
+     * 切面
+     *
+     * @param registerForm 注册表
+     */
     @Inspect
     @RequestMapping(value = "/test3", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public void test3(@RequestBody(required = false) @ZcyValidated RegisterForm registerForm) {
@@ -112,7 +123,7 @@ public class TestController {
      * @param bindingResult
      */
     @RequestMapping(value = "/test4", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public void test4(@RequestBody(required = false) @Validated Dog dog, BindingResult bindingResult) {
+    public void test4(@RequestBody(required = false) @Validated(ValidGroups.Second.class) Dog dog, BindingResult bindingResult) {
         if (bindingResult.getErrorCount() > 0) {
             // getFieldErrors() : 获取所有错误 Field
             List<FieldError> fieldErrors = bindingResult.getFieldErrors();
@@ -136,14 +147,14 @@ public class TestController {
     public String paramCheck( @Length(min = 3, max = 5) @RequestParam String name) {
 
         //自定义切面
-        //requireWriteService.createRequire(new User());
+//        requireWriteService.createRequire(new User());
         //使用工具类ValidationUtil校验
         //requireWriteService.updateRequire(new User());
         //spring提供的
         User user = new User();
         user.setName("1999999999");
-      //  requireWriteService2.deleteRequire(new User();
-       //requireWriteService.deleteRequire(user);
+//        requireWriteService2.deleteRequire(new User();
+       requireWriteService.deleteRequire(user);
         //requireWriteService.submitRequire(user);
         return null;
     }
@@ -169,16 +180,15 @@ public class TestController {
      */
     @RequestMapping("/test6")
     public void test6() {
-        ValidateParamService validateParamService = new ValidateParamService("99");
-        System.out.println(validateParamService);
-//        com.example.demo.dtotest.Car car = new com.example.demo.dtotest.Car( "VW", "USD-123", 4 );
-//        car.setPassedVehicleInspection( true );
-//        requireWriteService2.submitRequire(car);
-//
-//        Driver john = new Driver( "John Doe" );
-//        john.setAge( 18 );
-//        car.setDriver( john );
-//        requireWriteService2.submitRequire(car);
+
+        com.example.demo.dtotest.Car car = new com.example.demo.dtotest.Car( "VW", "USD-123", 4 );
+        car.setPassedVehicleInspection( true );
+        requireWriteService2.submitRequire(car);
+
+        Driver john = new Driver( "John Doe" );
+        john.setAge( 18 );
+        car.setDriver( john );
+        requireWriteService2.submitRequire(car);
 
 
 //        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
