@@ -23,6 +23,9 @@ public class RequireWriteServiceImpl2 implements RequireWriteService {
     @Autowired
     private Validator validator;
 
+    @Autowired
+    private ValidateParamService validateParamService;
+
     @Override
     public void createRequire(User user) {
 
@@ -65,6 +68,8 @@ public class RequireWriteServiceImpl2 implements RequireWriteService {
 
     @Override
     public String changePassword(String oldPassWord, String newPassWord){
+        validateParamService.getString();
+        System.out.println("test测试");
         return "123";
     }
 }

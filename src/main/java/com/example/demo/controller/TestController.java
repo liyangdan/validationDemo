@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.config.MainConfig;
 import com.example.demo.dtotest.Driver;
 import com.example.demo.dto.*;
 
@@ -7,6 +8,8 @@ import com.example.demo.services.RequireWriteServiceImpl;
 import com.example.demo.services.ValidateParamService;
 import com.example.demo.services.api.RequireWriteService;
 import com.example.demo.util.ValidList;
+import com.example.demo.validator.HibernateValidatorConfiguration;
+import com.example.demo.validator.PersonConfig;
 import com.example.demo.validator.aop.Inspect;
 
 import com.example.demo.validator.constraints.ZcyValidated;
@@ -15,6 +18,8 @@ import org.hibernate.validator.constraints.Length;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.http.MediaType;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -50,6 +55,12 @@ public class TestController {
 
     @Autowired
     Validator validator;
+
+    @Autowired
+    Person person;
+
+    public static ApplicationContext context = new AnnotationConfigApplicationContext(PersonConfig.class);
+
 
 
 
@@ -194,6 +205,30 @@ public class TestController {
 //        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
 //        executableValidator = factory.getValidator().forExecutables();
 
+    }
+
+
+    @RequestMapping("/test7")
+    public void test7() {
+
+        requireWriteService2.changePassword("00","00");
+
+//        Person person = (Person)context.getBean("getPerson");
+//        //Person person1 =
+//        person.drive();
+//        System.out.println(person.hashCode());
+//
+//        User user = (User)context.getBean(User.class);
+
+    }
+
+    @RequestMapping("/test8")
+    public void test8(){
+        AnnotationConfigApplicationContext applicationContext2 = new AnnotationConfigApplicationContext(MainConfig.class);
+        String[] beanNames = applicationContext2.getBeanDefinitionNames();
+        for(int i=0;i<beanNames.length;i++){
+            System.out.println("bean名称为==="+beanNames[i]);
+        }
     }
 
 

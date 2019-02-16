@@ -4,6 +4,7 @@ import com.example.demo.validator.aop.Inspect;
 import com.zcy.validator.constraints.IsMobile;
 import lombok.Data;
 import org.hibernate.validator.constraints.Range;
+import org.springframework.stereotype.Component;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.constraints.NotBlank;
@@ -14,6 +15,7 @@ import javax.validation.constraints.NotNull;
  * @date 2018/12/20 9:22 PM
  */
 @Validated
+@Component
 public class ValidateParamService {
     //校验参数
     public void update(@NotNull String userId,
@@ -26,6 +28,10 @@ public class ValidateParamService {
     //校验返回值
     public @NotBlank(message = "不能为空的字符串")String ValidateReturn(){
         return "";
+    }
+
+    public void getString(){
+        System.out.println("my first spring study");
     }
 
     public ValidateParamService() {

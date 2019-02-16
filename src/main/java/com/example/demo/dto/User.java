@@ -4,6 +4,7 @@ import com.example.demo.validator.constraints.Forbidden;
 import com.example.demo.validator.groups.ValidGroups;
 import com.zcy.validator.constraints.IsMobile;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.GroupSequence;
@@ -18,7 +19,12 @@ import javax.validation.groups.Default;
  */
 //@GroupSequence({ ValidGroups.First.class, ValidGroups.Second.class, User.class})
 @Data
+@NoArgsConstructor
 public class User {
+
+    public User(Person person){
+        System.out.println(person.hashCode());
+    }
 //    @Size(min = 2, max = 10,message = "{name.size}")
 ////    @Length(max = 3,message = "{name.length}")
     @NotNull(groups = ValidGroups.First.class)

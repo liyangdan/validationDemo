@@ -8,6 +8,8 @@ package com.example.demo.validator;
  * @date 2018/12/16 1:55 PM
  */
 
+import com.example.demo.dto.Person;
+import com.example.demo.dto.User;
 import com.example.demo.exception.ServiceResponseException;
 import org.hibernate.validator.HibernateValidator;
 import org.hibernate.validator.messageinterpolation.ResourceBundleMessageInterpolator;
@@ -69,5 +71,9 @@ public class HibernateValidatorConfiguration {
 //            throw new ServiceResponseException(constraintViolations.iterator().next().getMessage());
 //        }
 //    }
+
+
+
+
 }
 
